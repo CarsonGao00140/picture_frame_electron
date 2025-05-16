@@ -1,0 +1,16 @@
+:root {
+    font-family: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-family: inherit;
+    user-select: none;
+}
+
+html {
+    height: 100%;
+    overflow: hidden;
+}
