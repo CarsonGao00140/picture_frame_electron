@@ -1,7 +1,17 @@
-import { cpus, platform } from 'os';
+import fs from 'fs';
+import path from 'path';
+import os from 'os';
 import { app, BrowserWindow } from 'electron';
+import createServer from './server';
 
-if (cpus()?.[0]?.model === 'Cortex-A55') {
+let httpServer: ReturnType<typeof createServer> | undefined;
+
+const appDataDir = path.join(app.getPath('userData'), 'appData');
+const imagesDir = path.join(appDataDir, 'images');
+fs.existsSync(imagesDir) || fs.mkdirSync(imagesDir, { recursive: true });
+httpServer = createServer(imagesDir, 3000);
+
+if (os.cpus()?.[0]?.model === 'Cortex-A55') {
     app.commandLine.appendSwitch('use-gl', 'angle');
     app.commandLine.appendSwitch('use-angle', 'gles-egl');
 }
@@ -9,7 +19,7 @@ if (cpus()?.[0]?.model === 'Cortex-A55') {
 app.whenReady().then(() => {
     const window = new BrowserWindow({
         show: false,
-        kiosk: platform() === 'linux',
+        kiosk: os.platform() === 'linux',
     });
 
     if (app.isPackaged) {
@@ -22,3 +32,5 @@ app.whenReady().then(() => {
         window.webContents.openDevTools();
     };
 })
+
+app.on('will-quit', () => httpServer?.close())

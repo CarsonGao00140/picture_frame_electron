@@ -10,3 +10,12 @@
         <Route path="/frame" component={Frame} />
     </Router>
 </main>
+
+<style>
+    main {
+        position: fixed;
+        inset: 0;
+        background: white;
+        clip-path: inset(0 round 1rem);
+    }
+</style>

@@ -1,0 +1,18 @@
+type: http_request
+model: http_request
+id: rq_VMGbmYAm3C
+createdAt: 2025-05-14T00:28:03.614314
+updatedAt: 2025-05-14T00:45:59.735422
+workspaceId: wk_ZTBDmcvKRK
+folderId: null
+authentication: {}
+authenticationType: null
+body: {}
+bodyType: null
+description: ''
+headers: []
+method: GET
+name: List Images
+sortPriority: -1747182400000.0
+url: localhost:3000
+urlParameters: []
